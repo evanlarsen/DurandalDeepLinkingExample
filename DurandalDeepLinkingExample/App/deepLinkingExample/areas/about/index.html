@@ -1,0 +1,15 @@
+﻿<div>
+    <ul>
+        <li>
+            <a data-bind="click: showPage('aboutMe'), css: { 'active': isPageActive('aboutMe') }">About Me</a>
+        </li>
+        <li>
+            <a data-bind="click: showPage('aboutUs'), css: { 'active': isPageActive('aboutUs') }">About Us</a>
+        </li>
+        <li>
+            <a data-bind="click: showPage('aboutYou'), css: { 'active': isPageActive('aboutYou') }">About You</a>
+        </li>
+    </ul>
+
+    <div class="in-about" data-bind="compose: inAbout"></div>
+</div>
