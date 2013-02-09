@@ -7,32 +7,39 @@
             return 'deepLinkingExample/areas/about/' + name + '/' + name;
         }
 
+        function convertSplatToModuleId(splat) {
+            if (splat && splat.length > 0) {
+                if (splat[0] !== 'about') {
+                    return convertNameToModuleId(splat[0]);
+                }
+            }
+            return convertNameToModuleId(defaultPage);
+        }
+
         var App = {
             inAbout: viewModel.activator(),
+
             activate: function (activationData) {
-                if (activationData.splat && activationData.splat[0] != 'about') {
-                    App.inAbout(convertNameToModuleId(activationData.splat[0]));
-                } else {
-                    App.inAbout(convertNameToModuleId(defaultPage));
-                }
-                router.activeItem.settings.areSameItem = App.compareModules;
-            },
-            compareModules: function (currentItem, newItem, activationData) {
-                if (currentItem == newItem) {
-                    if (activationData && activationData.splat && activationData.splat[0] != 'about') {
-                        App.inAbout(convertNameToModuleId(activationData.splat[0]));
-                    } else {
-                        App.inAbout(convertNameToModuleId(defaultPage));
+                App.inAbout(convertSplatToModuleId(activationData.splat));
+
+                router.activeItem.settings.areSameItem = function (currentItem, newItem, data) {
+                    if (currentItem != newItem) {
+                        return false;
                     }
-                }
-                return (currentItem == newItem);
+                    else {
+                        App.inAbout(convertSplatToModuleId(data.splat));
+                        return true;
+                    }
+                };
             },
+
             showPage: function (name) {
                 return function () {
                     router.navigateTo('#/about/' + name);
                     App.inAbout(convertNameToModuleId(name));
                 };
             },
+
             isPageActive: function (name) {
                 var moduleName = convertNameToModuleId(name);
                 return ko.computed(function () {

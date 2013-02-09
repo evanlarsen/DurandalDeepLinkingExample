@@ -7,8 +7,6 @@
             activate: function () {
                 system.debug(true);
 
-                // set router to auto map based off my convention
-                router.mapAuto();
                 // my convention
                 router.autoConvertRouteToModuleId = function (url) {
                     return 'deepLinkingExample/areas/' + url + '/index';
