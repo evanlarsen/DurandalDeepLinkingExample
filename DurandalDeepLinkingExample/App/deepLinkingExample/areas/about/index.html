@@ -11,5 +11,5 @@
         </li>
     </ul>
 
-    <div class="in-about" data-bind="compose: inAbout"></div>
+    <div class="in-about" data-bind="compose: { model: inAbout, afterCompose: router.afterCompose }"></div>
 </div>

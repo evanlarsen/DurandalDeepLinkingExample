@@ -9,14 +9,13 @@
 
         function convertSplatToModuleId(splat) {
             if (splat && splat.length > 0) {
-                if (splat[0] !== 'about') {
-                    return convertNameToModuleId(splat[0]);
-                }
+                return convertNameToModuleId(splat[0]);
             }
             return convertNameToModuleId(defaultPage);
         }
 
         var App = {
+            router: router,
             inAbout: viewModel.activator(),
 
             activate: function (activationData) {
